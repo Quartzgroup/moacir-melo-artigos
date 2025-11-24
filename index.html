@@ -4,127 +4,328 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Artigos – Moacir Lázaro Melo</title>
+
   <style>
     :root{
-      --ink:#111;
-      --muted:#666;
-      --link:#0b4aa6;
-      --bg:#fafafa;
-      --card:#fff;
-      --border:#e7e7e7;
+      --rotary-blue:#0c3c8c;
+      --rotary-blue-2:#0a2f6b;
+      --rotary-gold:#f2c14e;
+      --ink:#0f172a;
+      --muted:#64748b;
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --border:#e6e9f2;
+      --radius:18px;
     }
+
+    *{box-sizing:border-box;}
     body{
-      font-family: Georgia, "Times New Roman", serif;
-      background: var(--bg);
-      color: var(--ink);
       margin:0;
-      padding:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 500px at 10% -10%, #e8efff 0, transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, #fff4da 0, transparent 55%),
+        linear-gradient(#f7f9ff, #f5f7fb);
     }
-    .wrap{
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 18px 60px;
+
+    .wrap{max-width:1050px; margin:0 auto; padding:22px 18px 70px;}
+
+    /* HERO */
+    .hero{
+      position:relative;
+      background: linear-gradient(135deg, var(--rotary-blue) 0%, var(--rotary-blue-2) 65%);
+      color:#fff;
+      border-radius:24px;
+      padding:26px;
+      overflow:hidden;
+      box-shadow:0 18px 50px rgba(12,60,140,.25);
     }
-    header{
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px 22px 14px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    .hero::after{
+      content:"";
+      position:absolute; inset:-40% -10% auto auto;
+      width:520px; height:520px; border-radius:50%;
+      background: radial-gradient(circle, rgba(242,193,78,.32), transparent 60%);
+      filter: blur(10px);
+      transform: translate(20%, -8%);
+      pointer-events:none;
     }
-    h1{ margin:0; font-size: 30px; letter-spacing:.2px;}
-    p.sub{ margin:8px 0 0; color:var(--muted); font-size:16px;}
-    .controls{
-      display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:center;
     }
-    input{
-      flex:1;
-      min-width:220px;
-      padding:10px 12px;
-      font-size:15px;
-      border:1px solid var(--border);
-      border-radius:10px;
-      outline:none;
+    @media (max-width: 860px){
+      .hero-grid{grid-template-columns:1fr; text-align:center;}
     }
-    .grid{
+
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight:700; font-size:12px; letter-spacing:.08em;
+      text-transform:uppercase;
+      background: rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      padding:7px 10px; border-radius:999px;
+      backdrop-filter: blur(4px);
+    }
+    .hero h1{
+      margin:12px 0 8px;
+      font-size:34px; line-height:1.15;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .hero p{
+      margin:0 0 12px;
+      font-size:17px; color:#eaf0ff; line-height:1.6;
+    }
+    .hero-quote{
+      margin-top:10px;
+      font-size:18px; font-weight:600;
+      color:#fff;
+    }
+    .gold{
+      color: var(--rotary-gold);
+      font-weight:800;
+    }
+
+    .hero-card{
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 20px;
+      padding:16px;
+      display:flex; gap:14px; align-items:center;
+      backdrop-filter: blur(6px);
+    }
+    @media (max-width: 860px){
+      .hero-card{justify-content:center;}
+    }
+
+    .avatar{
+      width:120px; height:120px; border-radius:50%;
+      border:3px solid rgba(242,193,78,.95);
+      object-fit:cover; flex:0 0 auto;
+      box-shadow:0 10px 24px rgba(0,0,0,.25);
+      background:#fff;
+    }
+    .hero-meta{
+      font-size:14px; color:#eef2ff; line-height:1.6;
+    }
+    .hero-meta strong{color:#fff;}
+
+    /* CONTENT */
+    .content{
       display:grid;
       grid-template-columns: 1fr;
       gap:14px;
-      margin-top:18px;
+      margin-top:16px;
     }
-    section{
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding:16px 18px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.03);
+
+    .panel{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:14px;
+      box-shadow:0 8px 20px rgba(15,23,42,.05);
     }
-    h2{ margin:0 0 8px; font-size:20px;}
-    ul{ margin:0; padding-left:18px;}
-    li{ margin:8px 0; }
-    a{ color:var(--link); text-decoration:none;}
-    a:hover{ text-decoration:underline;}
-    .meta{ color:var(--muted); font-size:14px; }
+
+    .controls{
+      display:grid;
+      grid-template-columns: 1.2fr .5fr .6fr auto;
+      gap:8px;
+      align-items:center;
+    }
+    @media (max-width: 860px){
+      .controls{grid-template-columns:1fr; }
+    }
+    .controls input, .controls select{
+      width:100%;
+      padding:12px 12px;
+      font-size:15px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      outline:none;
+      background:#fff;
+    }
+    .controls button{
+      padding:11px 14px;
+      font-size:14px; font-weight:700;
+      border:none; cursor:pointer;
+      color:#0b1b3b;
+      background: linear-gradient(180deg, #ffd77a, var(--rotary-gold));
+      border-radius:12px;
+      box-shadow:0 6px 14px rgba(242,193,78,.35);
+    }
+
+    /* CARDS */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+      margin-top:10px;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns: repeat(2, 1fr);}
+    }
+    @media (max-width: 620px){
+      .grid{grid-template-columns: 1fr;}
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:14px 14px 12px;
+      transition: transform .15s ease, box-shadow .15s ease;
+      display:flex; flex-direction:column; gap:8px;
+      box-shadow:0 6px 16px rgba(15,23,42,.05);
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      box-shadow:0 12px 26px rgba(15,23,42,.10);
+    }
+
+    .tag{
+      display:inline-flex; width:max-content;
+      font-size:12px; font-weight:700; letter-spacing:.03em;
+      color:var(--rotary-blue);
+      background:#e8efff;
+      padding:5px 8px; border-radius:999px;
+    }
+
+    .card a.title{
+      font-size:18px; font-weight:800; color:#0b1b3b; text-decoration:none;
+      line-height:1.3;
+    }
+    .card a.title:hover{ text-decoration:underline; }
+
+    .meta{
+      font-size:14px; color:var(--muted);
+      display:flex; flex-wrap:wrap; gap:8px;
+    }
+    .meta span{background:#f3f5fb; padding:4px 7px; border-radius:8px;}
+
     footer{
-      margin-top:18px;
-      color:var(--muted);
-      font-size:13px;
-      text-align:center;
+      margin-top:18px; text-align:center;
+      color:var(--muted); font-size:13px;
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
-    <header>
-      <h1>Artigos de Moacir Lázaro Melo</h1>
-      <p class="sub">Biblioteca de textos organizados para leitura completa.</p>
-      <div class="controls">
-        <input id="search" type="search" placeholder="Pesquisar por título ou palavra-chave…" oninput="filterList()" />
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="badge">Rotary • Escritor • Empresário</div>
+          <h1>Artigos de <span class="gold">Moacir Lázaro Melo</span></h1>
+          <p>
+            Textos publicados na <strong>Revista Planeta Água</strong>, reunidos aqui para leitura completa.
+            Reflexões sobre gerações, convivência humana, serviço ao próximo e o sentido de viver bem.
+          </p>
+          <div class="hero-quote">
+            “<strong>Melhorar vidas</strong> via <strong>Rotary Internacional</strong>.”
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <img class="avatar" src="assets/moacir-melo.jpg" alt="Moacir Lázaro Melo">
+          <div class="hero-meta">
+            <div><strong>Moacir Lázaro Melo</strong></div>
+            <div>Escritor • Empresário • Rotariano</div>
+            <div>+40 anos servindo comunidades</div>
+            <div>Publicações: Planeta Água</div>
+          </div>
+        </div>
       </div>
-    </header>
+    </section>
 
-    <div class="grid">
-      <section>
-        <h2>Ordem Cronológica</h2>
-        <ul id="chrono">
-          <!-- EXEMPLOS: depois você troca pelos artigos reais -->
-          <li data-title="Exemplo de Artigo 01">
-            <a href="artigos/artigo-01.html">2025-11-01 — Exemplo de Artigo 01</a>
-            <div class="meta">Categoria: Opinião • Tempo de leitura: 4 min</div>
-          </li>
-          <li data-title="Exemplo de Artigo 02">
-            <a href="artigos/artigo-02.html">2025-11-10 — Exemplo de Artigo 02</a>
-            <div class="meta">Categoria: Rotary • Tempo de leitura: 5 min</div>
-          </li>
-        </ul>
-      </section>
+    <section class="content panel">
+      <div class="controls">
+        <input id="searchTitle" type="search" placeholder="Buscar por título ou palavra-chave…" oninput="applyFilters()"/>
+        <input id="searchDate" type="search" placeholder="Buscar por data (ex: 2024-08)" oninput="applyFilters()"/>
+        <select id="searchVehicle" onchange="applyFilters()">
+          <option value="">Veículo (todos)</option>
+          <option value="Planeta Água">Revista Planeta Água</option>
+        </select>
+        <button onclick="clearFilters()">Limpar filtros</button>
+      </div>
 
-      <section>
-        <h2>Ordem Alfabética</h2>
-        <ul id="alpha">
-          <!-- EXEMPLOS: mesma lista, mas A-Z -->
-          <li data-title="Exemplo de Artigo 01"><a href="artigos/artigo-01.html">Exemplo de Artigo 01</a></li>
-          <li data-title="Exemplo de Artigo 02"><a href="artigos/artigo-02.html">Exemplo de Artigo 02</a></li>
-        </ul>
-      </section>
-    </div>
+      <div class="grid" id="cards">
+        <!-- CARD 1 -->
+        <article class="card"
+          data-title="como nossos pais de gerações em gerações belchior elis regina juventude gerações"
+          data-date="AAAA-MM-DD"
+          data-vehicle="Planeta Água">
+          <div class="tag">Artigo</div>
+          <a class="title" href="artigos/como-nossos-pais.html">Como Nossos Pais – De Gerações em Gerações</a>
+          <div class="meta">
+            <span>Data: <strong>[inserir]</strong></span>
+            <span>Veículo: Planeta Água</span>
+          </div>
+        </article>
+
+        <!-- CARD 2 -->
+        <article class="card"
+          data-title="ministério da solidão rotary oms conexão social depressão ansiedade servir"
+          data-date="AAAA-MM-DD"
+          data-vehicle="Planeta Água">
+          <div class="tag">Artigo</div>
+          <a class="title" href="artigos/ministerio-da-solidao.html">“Ministério da Solidão” Avança Mundo Afora</a>
+          <div class="meta">
+            <span>Data: <strong>[inserir]</strong></span>
+            <span>Veículo: Planeta Água</span>
+          </div>
+        </article>
+
+        <!-- CARD 3 -->
+        <article class="card"
+          data-title="também quero flores em vida gratidão amor reconhecimento zezé de camargo e luciano nelson cavaquinho"
+          data-date="AAAA-MM-DD"
+          data-vehicle="Planeta Água">
+          <div class="tag">Artigo</div>
+          <a class="title" href="artigos/tambem-quero-flores-em-vida.html">Também Quero Flores em Vida</a>
+          <div class="meta">
+            <span>Data: <strong>[inserir]</strong></span>
+            <span>Veículo: Planeta Água</span>
+          </div>
+        </article>
+      </div>
+    </section>
 
     <footer>
-      © Moacir Lázaro Melo — Artigos publicados originalmente no Instagram.
+      © Moacir Lázaro Melo • Biblioteca de artigos • Rotary Internacional
     </footer>
+
   </div>
 
 <script>
-  function filterList(){
-    const q = document.getElementById('search').value.toLowerCase();
-    const lists = [document.getElementById('chrono'), document.getElementById('alpha')];
-    lists.forEach(ul=>{
-      [...ul.querySelectorAll('li')].forEach(li=>{
-        const t = (li.dataset.title || li.textContent).toLowerCase();
-        li.style.display = t.includes(q) ? '' : 'none';
-      });
+  function applyFilters(){
+    const t = document.getElementById('searchTitle').value.toLowerCase().trim();
+    const d = document.getElementById('searchDate').value.toLowerCase().trim();
+    const v = document.getElementById('searchVehicle').value.toLowerCase().trim();
+
+    const cards = document.querySelectorAll('#cards .card');
+    cards.forEach(c=>{
+      const ct = (c.dataset.title || "").toLowerCase();
+      const cd = (c.dataset.date || "").toLowerCase();
+      const cv = (c.dataset.vehicle || "").toLowerCase();
+
+      const okTitle = !t || ct.includes(t);
+      const okDate  = !d || cd.includes(d);
+      const okVeh   = !v || cv.includes(v);
+
+      c.style.display = (okTitle && okDate && okVeh) ? "" : "none";
     });
   }
+
+  function clearFilters(){
+    document.getElementById('searchTitle').value="";
+    document.getElementById('searchDate').value="";
+    document.getElementById('searchVehicle').value="";
+    applyFilters();
+  }
 </script>
+
 </body>
 </html>
