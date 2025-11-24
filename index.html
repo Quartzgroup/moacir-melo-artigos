@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Artigos – Moacir Lázaro Melo</title>
+  <style>
+    :root{
+      --ink:#111;
+      --muted:#666;
+      --link:#0b4aa6;
+      --bg:#fafafa;
+      --card:#fff;
+      --border:#e7e7e7;
+    }
+    body{
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--ink);
+      margin:0;
+      padding:0;
+    }
+    .wrap{
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 18px 60px;
+    }
+    header{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 22px 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    h1{ margin:0; font-size: 30px; letter-spacing:.2px;}
+    p.sub{ margin:8px 0 0; color:var(--muted); font-size:16px;}
+    .controls{
+      display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;
+    }
+    input{
+      flex:1;
+      min-width:220px;
+      padding:10px 12px;
+      font-size:15px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      outline:none;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+      margin-top:18px;
+    }
+    section{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding:16px 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.03);
+    }
+    h2{ margin:0 0 8px; font-size:20px;}
+    ul{ margin:0; padding-left:18px;}
+    li{ margin:8px 0; }
+    a{ color:var(--link); text-decoration:none;}
+    a:hover{ text-decoration:underline;}
+    .meta{ color:var(--muted); font-size:14px; }
+    footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Artigos de Moacir Lázaro Melo</h1>
+      <p class="sub">Biblioteca de textos organizados para leitura completa.</p>
+      <div class="controls">
+        <input id="search" type="search" placeholder="Pesquisar por título ou palavra-chave…" oninput="filterList()" />
+      </div>
+    </header>
+
+    <div class="grid">
+      <section>
+        <h2>Ordem Cronológica</h2>
+        <ul id="chrono">
+          <!-- EXEMPLOS: depois você troca pelos artigos reais -->
+          <li data-title="Exemplo de Artigo 01">
+            <a href="artigos/artigo-01.html">2025-11-01 — Exemplo de Artigo 01</a>
+            <div class="meta">Categoria: Opinião • Tempo de leitura: 4 min</div>
+          </li>
+          <li data-title="Exemplo de Artigo 02">
+            <a href="artigos/artigo-02.html">2025-11-10 — Exemplo de Artigo 02</a>
+            <div class="meta">Categoria: Rotary • Tempo de leitura: 5 min</div>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Ordem Alfabética</h2>
+        <ul id="alpha">
+          <!-- EXEMPLOS: mesma lista, mas A-Z -->
+          <li data-title="Exemplo de Artigo 01"><a href="artigos/artigo-01.html">Exemplo de Artigo 01</a></li>
+          <li data-title="Exemplo de Artigo 02"><a href="artigos/artigo-02.html">Exemplo de Artigo 02</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <footer>
+      © Moacir Lázaro Melo — Artigos publicados originalmente no Instagram.
+    </footer>
+  </div>
+
+<script>
+  function filterList(){
+    const q = document.getElementById('search').value.toLowerCase();
+    const lists = [document.getElementById('chrono'), document.getElementById('alpha')];
+    lists.forEach(ul=>{
+      [...ul.querySelectorAll('li')].forEach(li=>{
+        const t = (li.dataset.title || li.textContent).toLowerCase();
+        li.style.display = t.includes(q) ? '' : 'none';
+      });
+    });
+  }
+</script>
+</body>
+</html>
